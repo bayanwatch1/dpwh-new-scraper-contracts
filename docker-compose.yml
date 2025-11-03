@@ -1,0 +1,48 @@
+# version: '3.8'x
+
+services:
+  dpwh_new_scraper2:
+    container_name: dpwh_new_scraper2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dpwh_new_scraper2:latest
+    
+    # Required for WireGuard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    
+    # Required for WireGuard
+    privileged: true
+    
+    volumes:
+      # Mount WireGuard configs
+      - ./wireguard_configs:/app/wireguard_configs:ro
+      
+      # Mount workdir for persistence
+      - ./workdir:/app/workdir
+      
+      # Mount the script (for development)
+      - ./scraper.py:/app/scraper.py:ro
+    
+    environment:
+      - WORKDIR=/app/workdir
+      - PYTHONUNBUFFERED=1
+    
+    # Keep container running
+    stdin_open: true
+    tty: true
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Network mode for WireGuard
+    network_mode: bridge
+    
+    # DNS settings (optional, for better connectivity)
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    
+    command: /bin/bash
