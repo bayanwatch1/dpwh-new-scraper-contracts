@@ -1,7 +1,7 @@
 import asyncio
 import subprocess
 
-INPUT_FILE = "input_dpwh_archive_viewing.v2.txt"
+INPUT_FILE = "input.dpwh.new.urls.v2.txt"
 
 SERVICE_NAME = "dpwh_new_scraper2"
 CHROMEDRIVER_PATH = "/usr/local/bin/chromedriver"
