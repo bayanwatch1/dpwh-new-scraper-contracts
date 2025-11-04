@@ -1,0 +1,5 @@
+beautifulsoup4==4.12.3
+lxml==5.1.0
+aiosqlite==0.19.0
+curl-cffi==0.6.2
+selenium==4.16.0
